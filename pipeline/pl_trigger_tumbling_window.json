@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pl_trigger_tumbling_window",
 	"properties": {
 		"folder": {
 			"name": "adf_05_handson_03"
