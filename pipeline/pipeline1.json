@@ -1,19 +1,19 @@
 {
-	"name": "pipe_github",
+	"name": "pipeline1",
 	"properties": {
 		"activities": [
 			{
-				"name": "waitgit",
+				"name": "Wait1",
 				"type": "Wait",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 1
+					"waitTimeInSeconds": 3
 				}
 			}
 		],
 		"folder": {
-			"name": "adf_04_github"
+			"name": "adf_05_handson_03"
 		},
 		"annotations": []
 	}
