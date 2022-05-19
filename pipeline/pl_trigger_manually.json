@@ -1,5 +1,5 @@
 {
-	"name": "pl_trigger_schedule",
+	"name": "pl_trigger_manually",
 	"properties": {
 		"activities": [
 			{
