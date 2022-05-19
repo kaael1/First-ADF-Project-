@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pl_trigger_schedule",
 	"properties": {
 		"activities": [
 			{
@@ -8,7 +8,7 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 3
+					"waitTimeInSeconds": 1
 				}
 			}
 		],
