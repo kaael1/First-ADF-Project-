@@ -1,0 +1,9 @@
+{
+	"name": "pl_trigger_storeged",
+	"properties": {
+		"folder": {
+			"name": "adf_05_handson_03"
+		},
+		"annotations": []
+	}
+}
