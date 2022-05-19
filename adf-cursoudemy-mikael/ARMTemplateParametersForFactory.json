@@ -25,6 +25,9 @@
 		},
 		"ls_local_filesMikael_properties_typeProperties_userId": {
 			"value": "kael"
+		},
+		"tr_storage_events_properties_typeProperties_scope": {
+			"value": "/subscriptions/613e8501-cdcf-4aee-b2d1-c2b56be0fcba/resourceGroups/rg-curso-udemy/providers/Microsoft.Storage/storageAccounts/dlscursoudemymikael"
 		}
 	}
 }
