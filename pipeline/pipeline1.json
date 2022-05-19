@@ -1,0 +1,9 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"folder": {
+			"name": "adf_05_handson_03"
+		},
+		"annotations": []
+	}
+}
