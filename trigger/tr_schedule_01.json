@@ -9,6 +9,12 @@
 					"referenceName": "pl_trigger_schedule",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_trigger_manually",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
