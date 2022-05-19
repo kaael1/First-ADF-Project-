@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "sqlserver_to_azuresql",
 	"properties": {
 		"activities": [
 			{
