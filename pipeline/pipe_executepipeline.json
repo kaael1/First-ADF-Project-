@@ -1,0 +1,66 @@
+{
+	"name": "pipe_executepipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "pipe_lookup",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipe_lookup",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pipe_getmetadadata",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pipe_lookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipe_getmetadata",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pipe_parametros",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "pipe_getmetadadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipe_parametros",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "adf_02_activities"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-18T20:18:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
