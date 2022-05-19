@@ -1,0 +1,131 @@
+{
+	"name": "pratica_03",
+	"properties": {
+		"activities": [
+			{
+				"name": "listar_tabelas",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT TABLE_SCHEMA, TABLE_NAME\nFROM INFORMATION_SCHEMA.TABLES\nWHERE TABLE_TYPE = 'BASE TABLE'\nAND TABLE_SCHEMA = 'SalesLT'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_generico_azuresql",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "*",
+							"tableName": "*"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "loop_tabelas",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "listar_tabelas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('listar_tabelas').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "db_to_parquet",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_generico_azuresql",
+									"type": "DatasetReference",
+									"parameters": {
+										"schemaName": {
+											"value": "@item().TABLE_SCHEMA",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@item().TABLE_NAME",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_generico_parquet",
+									"type": "DatasetReference",
+									"parameters": {
+										"containerName": "parquetfiles/tables_sql/",
+										"fileName": {
+											"value": "@item().TABLE_NAME",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "adf_03_handson01"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-19T13:51:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
